@@ -164,7 +164,7 @@ class LeaderboardErrorWidget extends StatelessWidget {
           dimension: 64,
           child: SpriteAnimationWidget.asset(
             images: Images(prefix: ''),
-            path: Assets.map.anim.spritesheetDashDeathFaintPng.path,
+            path: 'assets/map/anim/arbuz_run.png',
             data: SpriteAnimationData.sequenced(
               amount: 16,
               stepTime: 0.042,
@@ -192,7 +192,7 @@ class LeaderboardLoadingWidget extends StatelessWidget {
       dimension: 64,
       child: SpriteAnimationWidget.asset(
         images: Images(prefix: ''),
-        path: Assets.map.anim.spritesheetDashRunPng.path,
+        path: 'assets/map/anim/arbuz_run.png',
         data: SpriteAnimationData.sequenced(
           amount: 16,
           stepTime: 0.042,
