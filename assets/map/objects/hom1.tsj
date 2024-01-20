@@ -1,0 +1,14 @@
+{ "columns":8,
+ "image":"hom.png",
+ "imageheight":640,
+ "imagewidth":512,
+ "margin":0,
+ "name":"hom",
+ "spacing":0,
+ "tilecount":80,
+ "tiledversion":"1.10.2",
+ "tileheight":64,
+ "tilewidth":64,
+ "type":"tileset",
+ "version":"1.10"
+}

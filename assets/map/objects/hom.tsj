@@ -1,0 +1,14 @@
+{ "columns":9,
+ "image":"..\/\u044b\/27288596_oxer_185u_220223 [\u043f\u0440\u0435\u043e\u0431\u0440\u0430\u0437\u043e\u0432\u0430\u043d\u043d\u044b\u0439].png",
+ "imageheight":580,
+ "imagewidth":580,
+ "margin":0,
+ "name":"27288596_oxer_185u_220223 [\u043f\u0440\u0435\u043e\u0431\u0440\u0430\u0437\u043e\u0432\u0430\u043d\u043d\u044b\u0439]",
+ "spacing":0,
+ "tilecount":81,
+ "tiledversion":"1.10.2",
+ "tileheight":64,
+ "tilewidth":64,
+ "type":"tileset",
+ "version":"1.10"
+}

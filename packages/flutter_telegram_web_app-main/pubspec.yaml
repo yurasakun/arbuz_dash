@@ -1,0 +1,25 @@
+name: flutter_telegram_web_app
+description: Build a Telegram Web App using Flutter Web
+version: 0.0.1
+homepage: https://github.com/rohitsangwan01/flutter_telegram_web_app
+repository: https://github.com/rohitsangwan01/flutter_telegram_web_app
+issue_tracker: https://github.com/rohitsangwan01/flutter_telegram_web_app/issues
+
+environment:
+  sdk: '>=3.0.1 <4.0.0'
+  flutter: ">=3.3.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  js: ^0.6.7  
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  plugin:
+    platforms:
+      web:

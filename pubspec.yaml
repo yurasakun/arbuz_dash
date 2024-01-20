@@ -1,0 +1,106 @@
+name: arbuz_dash
+description: Super arbuz game dash.
+version: 1.0.0+16
+publish_to: none
+
+environment:
+  sdk: '>=3.2.0 <4.0.0'
+  flutter: 3.16.0
+
+
+dependencies:
+  app_ui:
+    path: packages/app_ui
+  user_repository:
+    path: packages/user_repository
+  flutter_telegram_web_app:
+    path: packages/flutter_telegram_web_app-main
+  authentication_repository:
+    path: packages/authentication_repository
+  audioplayers: ^5.2.0
+  bloc: ^8.1.2
+  cloud_firestore: ^4.12.2
+  equatable: ^2.0.5
+  file_selector: ^1.0.1
+  firebase_analytics: ^10.7.1
+  firebase_auth: ^4.12.1
+  firebase_core: ^2.21.0
+  flame: ^1.10.0
+  flame_behaviors: ^1.0.0
+  flame_tiled: 1.18.3
+  flow_builder: ^0.0.9
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^8.1.3
+  flutter_localizations:
+    sdk: flutter
+  font_awesome_flutter: ^10.6.0
+  intl: ^0.18.0
+  leaderboard_repository:
+    path: packages/leaderboard_repository
+  leap: 0.5.3
+  logging: ^1.2.0
+  ordered_set: ^5.0.2
+  path: ^1.8.3
+  pathxp: ^0.4.0
+  provider: ^6.0.5
+  share_plus: ^7.2.1
+  shared_preferences: ^2.2.2
+  url_launcher: ^6.2.1
+
+dev_dependencies:
+  bloc_test: ^9.1.2
+  flame_test: ^1.14.0
+  flutter_launcher_icons: ^0.13.1
+  build_runner:
+  flutter_gen_runner:
+  flutter_test:
+    sdk: flutter
+  mocktail: ^1.0.0
+  very_good_analysis: ^5.0.0
+
+dependency_overrides:
+  flame_tiled:
+    git:
+      url: https://github.com/flame-engine/flame.git
+      ref: main
+      path: packages/flame_tiled
+  leap:
+    git:
+      url: https://github.com/VeryGoodOpenSource/leap.git
+      ref: vgv
+      path: packages/leap
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  assets:
+    - assets/images/
+    - assets/map/
+    - assets/map/anim/
+    - assets/map/tiles/
+    - assets/map/objects/
+    - assets/music/
+    - assets/sfx/
+
+flutter_launcher_icons:
+  android: true
+  adaptive_icon_foreround: "./android_icon.png"
+  adaptive_icon_background: "#5ec7db"
+  min_sdk_android: 26
+  image_path: './android_icon.png'
+  ios: 'ios_icon.png'
+  remove_alpha_ios: true
+  web:
+    generate: true
+    image_path: 'android_icon.png'
+    background_color: '#0046a3'
+    theme_color: '#5ec7db'
+  windows:
+    generate: true
+    image_path: 'android_icon.png'
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: 'android_icon.png'

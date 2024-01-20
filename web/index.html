@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Arbuz Dash - A Good Game on Flutter and Telegram">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Arbuz Dash Run">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Share image -->
+  <meta property="og:image" content="icons/Icon-192.png">
+  <meta property="og:image:type" content="image/png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link
+    href="https://fonts.googleapis.com/css?family=Google+Sans:400,500"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css?family=Google+Sans+Text:400,500"
+    rel="stylesheet"
+  />
+
+  <title>Arbuz Dash - A Good Game on Flutter and Telegram</title>
+  <link rel="manifest" href="manifest.json">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-67589403-11"></script>
+  <script src="https://telegram.org/js/telegram-web-app.js" defer=""></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date()); 
+    gtag('config', 'UA-67589403-11');
+  </script>
+  <style type="text/css">
+    html {
+      height: 100%;
+    }
+
+    body.loading-mode {
+      min-height: 100vh;
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      overflow: hidden;
+      margin: 0;
+      background-color: #346EEB;
+      background: url("background.svg")  repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+
+    .loading-mode p {
+      font-family: "Google Sans Text";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 18px;
+      text-align: center;
+      letter-spacing: 0.25px;
+      color: #ffffff;
+    }
+
+    .loading-mode #progress-bar {
+      position: absolute;
+      bottom: 180px;
+      padding: 3px;
+      width: 400px;
+      background: rgba(255, 255, 255, 0.24);
+      border-radius: 100px;
+    }
+
+    .loading-mode #progress-indicator {
+      height: 24px;
+      width: 0%;
+      background: linear-gradient(90deg, #F9F8C4, #27F5DD);
+      border-radius: 100px;
+    }
+
+    #splash-copy {
+      position: absolute;
+      bottom: 204px;
+      font-size: 32px;
+    }
+
+    #splash-logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60%;
+      max-width: 400px;
+      height: auto;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+    }
+  </style>
+  <script>
+    // The value below is injected by flutter build, do not touch.
+    var serviceWorkerVersion = null;
+  </script>
+</head>
+
+<body class="loading-mode">
+  <object id="splash-logo" data="logo.svg" type="image/svg+xml"></object>
+  <p id="splash-copy">
+    Loading...
+  </p>
+  <div id="progress-bar">
+    <div id="progress-indicator"></div>
+  </div>
+  <script>
+    (function () {
+      const progressBar = document.querySelector("#progress-bar");
+      const progressIndicator = document.querySelector("#progress-indicator");
+      const splashCopy = document.querySelector("#splash-copy");
+      const splashLogo = document.querySelector("#splash-logo");
+
+      const additionalScripts = [];
+
+      function injectScript(url) {
+        return new Promise(function (resolve) {
+          let scriptTag = document.createElement("script");
+          scriptTag.src = url;
+          scriptTag.type = "application/javascript";
+          scriptTag.onload = function () {
+            resolve();
+          };
+
+          document.body.append(scriptTag);
+        });
+      }
+
+      function beginPreloading(manifestAssets) {
+        var assets = [
+          "flutter.js",
+          "main.dart.js",
+
+          ...additionalScripts,
+          ...manifestAssets,
+        ];
+        let totalAssets = assets.length + 1;
+        let loaded = 0;
+
+        const batchSize = 20;
+
+        async function reportProgress() {
+          loaded++;
+          const value = Math.floor((loaded / totalAssets) * 100) + "%";
+          progressIndicator.style.width = value;
+
+          if (assets.length == 0) {
+            dispatchAppLoad();
+          } else {
+            load(assets.shift());
+          }
+        }
+
+        function load(url) {
+          const req = new XMLHttpRequest();
+          req.onload = reportProgress;
+          req.open("get", url);
+          req.send();
+        }
+
+        function startBatch() {
+          const end = Math.min(batchSize, assets.length);
+          for (let i = 0; i < end; i++) {
+            load(assets.shift());
+          }
+        }
+
+        var scriptLoaded = false;
+        async function dispatchAppLoad() {
+          if (scriptLoaded) {
+            return;
+          }
+          scriptLoaded = true;
+
+          for (let i = 0; i < additionalScripts.length; i++) {
+            await injectScript(additionalScripts[i]);
+          }
+
+          await injectScript("flutter.js");
+
+          // Download main.dart.js
+          _flutter.loader.loadEntrypoint({
+            serviceWorker: {
+              serviceWorkerVersion: serviceWorkerVersion,
+            },
+            onEntrypointLoaded: await function (engineInitializer) {
+              engineInitializer
+                .initializeEngine()
+                .then(async function (appRunner) {
+                  window.addEventListener(
+                    "flutter-first-frame",
+                    function () {
+                      progressBar.remove();
+                      splashLogo.remove();
+                      splashCopy.remove();
+                      document.body.classList.remove("loading-mode");
+                    }
+                  );
+
+                  appRunner.runApp();
+              });
+            },
+          });
+        }
+
+        startBatch();
+      }
+
+      window.addEventListener("load", async function (ev) {
+        const response = await fetch("assets/AssetManifest.json");
+        const manifest = await response.json();
+        const assets = Object.values(manifest)
+          .map((list) => list.map((url) => "assets/" + url))
+          .reduce((arr, curr) => [...arr, ...curr]);
+
+        beginPreloading(assets);
+      });
+    })();
+  </script>
+</body>
+
+</html>
